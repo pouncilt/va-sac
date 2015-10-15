@@ -3,7 +3,7 @@
  */
 vaEmailModule.controller('BeneficiaryController', ['$scope', 'BeneficiaryService', function ($scope, BeneficiaryService) {
     $scope.sendEmailBeneficiaryEmailMessages = [];
-    $scope.showBeneficiaryEmailSuccessfulMessage = false;
+    $scope.veteranBeneficiaryEmailSent = false;
     $scope.format = 'M/d/yyyy';
     $scope.todaysDate = new Date().getTime();
 
@@ -18,10 +18,10 @@ vaEmailModule.controller('BeneficiaryController', ['$scope', 'BeneficiaryService
         };
 
         BeneficiaryService.sendEmail(requestParameters).then(function (response) {
-            $scope.showBeneficiaryEmailSuccessfulMessage = true;
+            $scope.veteranBeneficiaryEmailSent = true;
         }, function (error) {
             $scope.sendEmailBeneficiaryEmailMessages.push(error);
-            $scope.showBeneficiaryEmailSuccessfulMessage = false;
+            $scope.veteranBeneficiaryEmailSent = false;
         });
     };
 }]);

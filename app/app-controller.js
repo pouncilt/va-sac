@@ -3,12 +3,12 @@
  */
 myApp.controller('AppController', ['$scope', function($scope) {
     $scope.veteranInfo = {
-        primaryEmail: "john.doe@va.gov",
+        primaryEmail: "",
         fullName: "John Doe"
     };
     $scope.beneficiaryInfo = {
         primaryEmail: "lillie.cotton@gmail.com",
-        secondaryEmail: "lillie.cotton@yahoo.com",
+        secondaryEmail: "",
         fullName: "Lillie Cotton"
     };
 }]);

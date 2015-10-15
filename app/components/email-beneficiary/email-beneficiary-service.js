@@ -3,11 +3,11 @@
  */
 vaEmailModule.service('BeneficiaryService', ['$q', '$resource', function($q, $resource){
     var sendEmail = function(requestParameters) {
-        var deferred = $q.deferred();
+        var deferred = $q.defer();
 
         deferred.resolve("Successful");
 
-        return deferred.promise();
+        return deferred.promise;
     };
 
     return {

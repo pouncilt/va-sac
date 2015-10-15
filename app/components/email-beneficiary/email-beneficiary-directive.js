@@ -4,8 +4,8 @@ vaEmailModule.directive('veteranBeneficiaryEmail', [function () {
         scope: {
             veteranBeneficiaryInfo: '=beneficiaryInfo',
             veteranInfo: '=',
-            action: '=',
-            pathInfo: '='
+            action: '@',
+            pathInfo: '@'
         },
         controller: 'BeneficiaryController',
         controllerAs: 'emailBeneficiaryController',
