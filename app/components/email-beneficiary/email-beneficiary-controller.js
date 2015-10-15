@@ -1,8 +1,7 @@
 /**
  * Created by tonte on 10/14/15.
  */
-angular.module('myApp.email_beneficiary', [])
-.controller('BeneficiaryController', ['$scope', 'BeneficiaryService', function ($scope, BeneficiaryService) {
+vaEmailModule.controller('BeneficiaryController', ['$scope', 'BeneficiaryService', function ($scope, BeneficiaryService) {
     $scope.sendEmailBeneficiaryEmailMessages = [];
     $scope.showBeneficiaryEmailSuccessfulMessage = false;
     $scope.format = 'M/d/yyyy';

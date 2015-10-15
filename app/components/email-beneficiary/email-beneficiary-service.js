@@ -1,12 +1,16 @@
 /**
  * Created by tonte on 10/14/15.
  */
-angular.module('myApp.email_beneficiary', []).service('BeneficiaryService', [function(){
+vaEmailModule.service('BeneficiaryService', ['$q', '$resource', function($q, $resource){
     var sendEmail = function(requestParameters) {
-        return "success";
+        var deferred = $q.deferred();
+
+        deferred.resolve("Successful");
+
+        return deferred.promise();
     };
 
     return {
         sendEmail: sendEmail
-    };
+    }
 }]);
