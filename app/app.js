@@ -7,7 +7,7 @@ var myApp = angular.module('myApp', [
     'myApp.view1',
     'myApp.view2',
     'myApp.version',
-    'gov.va.sac.email.beneficiary.module'
+    'gov.va.email.beneficiary.module'
 ])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/view1'});

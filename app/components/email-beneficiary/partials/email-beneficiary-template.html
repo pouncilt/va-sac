@@ -25,7 +25,8 @@
 </div>
 <div style="border: 1px solid black" ng-if="veteranBeneficiaryEmailSent == true">
     <div style="border: 1px solid red">
-        <b>Your {{action}} form has successfully been submitted!</b>
+        <b>Your {{action}} form has successfully been submitted!</b><br>
+        Your request was submitted on {{todaysDate | date : format}}.
     </div>
     <div style="border: 1px solid green">
 

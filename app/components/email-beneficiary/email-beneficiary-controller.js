@@ -1,7 +1,7 @@
 /**
  * Created by tonte on 10/14/15.
  */
-vaEmailModule.controller('BeneficiaryController', ['$scope', 'BeneficiaryService', function ($scope, BeneficiaryService) {
+vaEmailModule.controller('BeneficiaryController', ['$scope', '$location', 'BeneficiaryService', function ($scope, $location, BeneficiaryService) {
     $scope.sendEmailBeneficiaryEmailMessages = [];
     $scope.veteranBeneficiaryEmailSent = false;
     $scope.format = 'M/d/yyyy';

@@ -10,6 +10,7 @@ vaEmailModule.service('BeneficiaryService', ['$q', '$resource', function($q, $re
         return deferred.promise;
     };
 
+
     return {
         sendEmail: sendEmail
     }
