@@ -11,4 +11,15 @@ myApp.controller('AppController', ['$scope', function($scope) {
         secondaryEmail: "",
         fullName: "Lillie Cotton"
     };
+    $scope.staffInfo = {
+
+    };
+
+    $scope.setStaffInfo = function(staffInfo) {
+        $scope.staffInfo = staffInfo;
+    };
+
+    $scope.getStaffInfo = function(){
+        return $scope.staffInfo;
+    };
 }]);

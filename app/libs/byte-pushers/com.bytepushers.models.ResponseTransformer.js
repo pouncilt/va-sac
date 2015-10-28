@@ -28,15 +28,15 @@ BytePushers.models.ResponseTransformer =  BytePushers.namespace("com.byte-pusher
  * @method
  * @param {String} jsonResponse  Represents the JSON response of a Restful service call.
  * @param {Transformer} payloadTransformer  Represents the JSON response transformer that is responsible for transforming the JSON Response into the appropriate JavaScript Domain Object Model.
- * @param {Boolean} transformPayloadWrapper  Optional flag determines if the Transformer should transform the payload wrapper. Payload wrappers are transformed by default.
+ * @param {Boolean} transformResponseStatus  Optional flag determines if the Transformer should transform the response status.  Response Status are transformed by default.
  * @param {Boolean} transformPayload  Optional flag determines if the Transformer should transform the payload.  Payloads are transformed by default.
  * @returns {BytePushers.models.Response} The response domain model of a service call request.
  *
  * @author <a href="mailto:pouncilt.developer@gmail.com">Tont&eacute; Pouncil</a>
  */
-BytePushers.models.ResponseTransformer.transformJSONResponse = function (jsonResponse, payloadTransformer, transformPayloadWrapper, transformPayload) {
+BytePushers.models.ResponseTransformer.transformJSONResponse = function (jsonResponse, payloadTransformer, transformResponseStatus, transformPayload) {
     'use strict';
-    transformPayloadWrapper = (Object.isBoolean(transformPayloadWrapper))? transformPayloadWrapper : true;
+    transformResponseStatus = (Object.isBoolean(transformResponseStatus))? transformResponseStatus: true;
     transformPayload = (Object.isBoolean(transformPayload)) ? transformPayload : true;
         /**
          * Represent the response from a Restful service call.
@@ -67,24 +67,31 @@ BytePushers.models.ResponseTransformer.transformJSONResponse = function (jsonRes
         throw new BytePushers.exceptions.InvalidParameterException("payloadTransformer can not be null or undefined.");
     }
 
-    if (transformPayloadWrapper && !Object.isDefined(jsonResponse)) {
+    if (transformResponseStatus && !Object.isDefined(jsonResponse)) {
         throw new BytePushers.exceptions.InvalidParameterException("jsonResponse can not be null or undefined.");
     }
 
-    if (transformPayloadWrapper && !Object.isDefined(jsonResponse.status) ) {
+    if (transformResponseStatus && !Object.isDefined(jsonResponse.status) ) {
         throw new BytePushers.exceptions.InvalidParameterException("jsonResponse.status can not be null or undefined.");
     }
 
-
-    responseStatus = new BytePushers.models.ResponseStatus(jsonResponse.status);
-    if (responseStatus.getRequestStatus().toLowerCase() === "Successful".toLowerCase()) {
-        if (transformPayload && !Object.isDefined(jsonResponse.payload)) {
-            throw new BytePushers.exceptions.InvalidParameterException("jsonResponse.payload can not be null or undefined.");
-        }
-        responsePayload = (transformPayload)? payloadTransformer.transformJSONPayload(jsonResponse.payload) : null;
+    if(transformResponseStatus){
+        responseStatus = new BytePushers.models.ResponseStatus(jsonResponse.status);
     }
 
-    response = (transformPayloadWrapper)? new BytePushers.models.Response(responseStatus, responsePayload): responsePayload;
+    if(transformPayload) {
+        if (Object.isDefined(jsonResponse.payload)) {
+            responsePayload = payloadTransformer.transformJSONPayload(jsonResponse.payload);
+        } else {
+            responsePayload = payloadTransformer.transformJSONPayload(jsonResponse)
+        }
+    }
+
+    if(!responseStatus){
+        responseStatus = new BytePushers.models.ResponseStatus({requestStatus: "Successful", messages: []});
+    }
+
+    response = new BytePushers.models.Response(responseStatus, responsePayload);
 
     return response;
 };

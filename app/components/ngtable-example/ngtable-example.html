@@ -1,0 +1,45 @@
+<div ng-app="myApp" class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">Sorting - basic example</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Overview</h4>
+                        <p><code>ngTable</code> provides a header template that adds sorting to a html table</p>
+                        <ul>
+                            <li>Specify which column should be sortable</li>
+                            <li>Optionally supply the initial columns to sort to the <code>NgTableParams</code> constructor call</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="bs-callout bs-callout-warning">
+                        <h4>Got a <code>getData</code> function?</h4>
+                        <p>In this case you'll need to apply the values from <code>NgTableParams.sorting()</code> to the data you want to display in your table. This is typically the case when the data is being fetched from the server.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" ng-controller="demoController as demo">
+            <h3>ngTable directive</h3>
+            <table ng-table="demo.tableParams" class="table table-condensed table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td data-title="'Name'" sortable="'name'">{{row.name}}</td>
+                    <td data-title="'Age'" sortable="'age'">{{row.age}}</td>
+                    <td data-title="'Money'">{{row.money}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6" ng-controller="dynamicDemoController as demo">
+            <h3>ngTableDynamic directive</h3>
+            <table ng-table-dynamic="demo.tableParams with demo.cols" class="table table-condensed table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">{{row[col.field]}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

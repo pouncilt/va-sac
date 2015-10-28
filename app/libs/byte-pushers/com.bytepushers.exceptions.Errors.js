@@ -1,5 +1,5 @@
 var BytePushers = BytePushers || {};
-BytePushers.exceptions = BytePushers.namespace("com.bytepushers.exceptions");
+BytePushers.exceptions = BytePushers.namespace("software.bytepushers.exceptions");
 BytePushers.exceptions.InvalidParameterException = function (message) {
 	"use strict";
 	Error.call(this, message);

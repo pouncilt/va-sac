@@ -94,7 +94,7 @@ BytePushers.models.ResponseStatus = function (jsonResponseStatus) {
      * @returns {EScreeningDashboardApp.models.Message} The response message of the service call.
      */
     this.getMessages = function () {
-        return messages;
+        return convertResponseMessages(messages, determineMessageType);
     };
 
     /**

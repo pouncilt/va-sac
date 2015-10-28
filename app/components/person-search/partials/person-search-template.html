@@ -1,0 +1,108 @@
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+
+<div class="align-left alert alert-danger" ng-if="errorMessageExist === true">
+    <div>error messages:</div>
+    <li ng-repeat="error in personSearchResultMessages">
+        {{error.value}}
+    </li>
+</div>
+
+<div style="width:100%;" ng-if="personSearchCompleted == false">
+    <form>
+        <section style="height:150px;margin:10px;padding:10px;">
+            <div style="width:50%;float:left;">
+                <fieldset>
+                    <legend>&nbsp;Name&nbsp;&nbsp;&nbsp;</legend>
+                    <div style="height:100px;">
+                        *First Name: <input type="text" ng-model="searchCriteriaInfo.firstName"><br>
+                        &nbsp;Middle Name: <input type="text" ng-model="searchCriteriaInfo.middleName"><br>
+                        *Last Name: <input type="text" ng-model="searchCriteriaInfo.lastName">
+                    </div>
+                </fieldset>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>&nbsp;Person&nbsp;&nbsp;&nbsp;</legend>
+                    <div style="height:100px;">
+                        Date of Birth: <input type="text" ng-model="searchCriteriaInfo.dob">&nbsp;&nbsp;(DOB) format: YYYYMMDD)<br>
+                        Gender: <select ng-model="searchCriteriaInfo.gender">
+                            <option value="volvo">Select One</option>
+                            <option value="saab">Male</option>
+                            <option value="mercedes">Female</option>
+                            <option value="audi">Undifferentiated</option>
+                        </select><br>
+                        Primary Phone: <input type="text" ng-model="searchCriteriaInfo.primaryPhoneNumber">&nbsp;&nbsp;(format: ##########)
+                    </div>
+                </fieldset>
+            </div>
+        </section>
+        <section style="height:150px;margin:10px;padding:10px;">
+            <div style="width:50%;float:left;">
+                <fieldset>
+                    <legend>&nbsp;Address&nbsp;&nbsp;&nbsp;</legend>
+                    <div style="height:100px;">
+                        Street Address <input type="text" ng-model="searchCriteriaInfo.streetAddress"><br>
+                        City <input type="text" ng-model="searchCriteriaInfo.city"><br>
+                        State <input type="text" ng-model="searchCriteriaInfo.state"><br>
+                        Zip Code <input type="text" ng-model="searchCriteriaInfo.zipcode">
+                    </div>
+                </fieldset>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>&nbsp;Indentification&nbsp;&nbsp;&nbsp;</legend>
+                    <div style="height:100px;">
+                        SSN <input type="text" ng-model="searchCriteriaInfo.ssn">
+                    </div>
+                </fieldset>
+            </div>
+        </section>
+        <section style="margin:10px;padding:10px;">
+            <div style="height:35px;width:50%;float:left;">
+                <div style="border: 1px solid darkred; float: left">
+                    <button type="submit" value="Submit" ng-click="reset()">Clear</button>
+                </div>
+            </div>
+            <div style="height:35px;">
+                <div style="border: 1px solid darkred; float: right">
+                    <button type="submit" value="Submit" ng-click="search()">Search</button>
+                </div>
+            </div>
+        </section>
+
+    </form>
+</div>
+<div style="border: 1px solid black" ng-if="personSearchCompleted == true">
+    <section style="height:150px;background:aqua;margin:10px;padding:10px;">
+        <div style="border: 1px solid red;height:150px;background:red;width:50%;float:left;">name</div>
+        <div style="border: 1px solid green;height:150px;background:blue;">person</div>
+    </section>
+    <section style="height:150px;background:aqua;margin:10px;padding:10px;">
+        <div style="border: 1px solid red;height:150px;background:red;width:50%;float:left;">Address</div>
+        <div style="border: 1px solid green;height:150px;background:blue;">Identification</div>
+    </section>
+    <section style="height:150px;background:aqua;margin:10px;padding:10px;">
+        <div style="border: 1px solid red;height:150px;background:red;width:50%;float:left;">Clear</div>
+        <div style="border: 1px solid green;height:150px;background:blue;">Submit</div>
+    </section>
+    <div style="border: 1px solid darkred; float: right">
+        <button type="submit" value="Submit" ng-click="sendEmail()">Submit</button>
+    </div>
+</div>

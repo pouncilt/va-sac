@@ -1,14 +1,14 @@
 /**
  * Created by tonte on 10/15/15.
  */
-function VAPersonInfo(vaPersonInfoConfig) {
+function VAPerson(vaPersonInfoConfig) {
     var ipid = (Object.isDefined(vaPersonInfoConfig) && Object.isString(vaPersonInfoConfig.ipid)) ? vaPersonInfoConfig.ipid : null;
     var secid = (Object.isDefined(vaPersonInfoConfig) && Object.isString(vaPersonInfoConfig.secid)) ? vaPersonInfoConfig.secid : null;
     var firstName = (Object.isDefined(vaPersonInfoConfig) && Object.isString(vaPersonInfoConfig.firstName)) ? vaPersonInfoConfig.firstName : null;
     var middleName = (Object.isDefined(vaPersonInfoConfig) && Object.isString(vaPersonInfoConfig.middleName)) ? vaPersonInfoConfig.middleName : null;
     var lastName = (Object.isDefined(vaPersonInfoConfig) && Object.isString(vaPersonInfoConfig.lastName)) ? vaPersonInfoConfig.lastName : null;
     var prefix = (Object.isDefined(vaPersonInfoConfig) && Object.isString(vaPersonInfoConfig.prefix)) ? vaPersonInfoConfig.prefix : null;
-    var ssn = (Object.isDefined(vaPersonInfoConfig) && Object.isNumeric(vaPersonInfoConfig.ssn)) ? vaPersonInfoConfig.ssn : null;
+    var ssn = (Object.isDefined(vaPersonInfoConfig) && Object.isString(vaPersonInfoConfig.ssn)) ? vaPersonInfoConfig.ssn : null;
     var gender = (Object.isDefined(vaPersonInfoConfig) && Object.isString(vaPersonInfoConfig.gender)) ? vaPersonInfoConfig.gender : null;
     var birthDate = (Object.isDefined(vaPersonInfoConfig) && Object.isNumeric(vaPersonInfoConfig.birthDate)) ? new Date(vaPersonInfoConfig.birthDate) : null;
     var addresses = (Object.isDefined(vaPersonInfoConfig) && Object.isArray(vaPersonInfoConfig.addresses)) ? createAddresses(vaPersonInfoConfig.addresses) : [];
@@ -29,9 +29,9 @@ function VAPersonInfo(vaPersonInfoConfig) {
 
     function createPhones(phonesConfig) {
         var tempAddresses = [];
-        if((Object.isDefined(phonesConfig) && (Object.isArray(phonesConfig)))) {
+        if((Object.isArray(phonesConfig))) {
             phonesConfig.forEach(function(phoneConfig){
-                tempAddresses.push(new Phone(phoneConfig));
+                tempAddresses.push(new PhoneNumber(phoneConfig));
             });
         }
         return tempAddresses;
@@ -59,7 +59,7 @@ function VAPersonInfo(vaPersonInfoConfig) {
     function getIcnAsJson(serializeUIProperties){
         var json = "[";
         icn.forEach(function (icnString, index, arr) {
-            json += (index < (arr.length -1)) ? icnString + "," : icnString;
+            json += (index < (arr.length -1)) ? "\"" + icnString + "\"," : "\"" + icnString + "\"";
         });
         json += "]";
         return json;
@@ -68,7 +68,7 @@ function VAPersonInfo(vaPersonInfoConfig) {
     function getEdiPiAsJson(serializeUIProperties){
         var json = "[";
         edipi.forEach(function (edipiString, index, arr) {
-            json += (index < (arr.length -1)) ? edipiString + "," : edipiString;
+            json += (index < (arr.length -1)) ? "\"" + edipiString + "\"," : "\"" + edipiString + "\"";
         });
         json += "]";
         return json;
@@ -147,7 +147,7 @@ function VAPersonInfo(vaPersonInfoConfig) {
             jsonLastModifiedBy = (Object.isDefined(lastModifiedBy))? "\"" + lastModifiedBy + "\"" : null,
             jsonProtectedMetaData = (Object.isDefined(protectedMetaData))? "\"" + protectedMetaData + "\"" : null,*/
             json =  "{" +
-                "\"ipid\": " + "\"jsonIpid\"" + "," +
+                "\"ipid\": " + jsonIpid + "," +
                 "\"secid\": " + jsonSecid + "," +
                 "\"firstName\": " + jsonFirstName + "," +
                 "\"middleName\": " + jsonMiddleName + "," +

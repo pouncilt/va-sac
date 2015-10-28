@@ -3,9 +3,13 @@
  */
 'use strict';
 
-var vaPersonSearchModule = angular.module('gov.va.person.search.module', ['ngRoute'])
-.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/email-beneficiary', {
-        templateUrl: 'components/email-beneficiary/email-beneficiary.html'
-    });
-}]);
+var vaPersonSearchModule = angular.module('gov.va.person.search.module', ['ngRoute', 'ngTable', 'ui.bootstrap'])
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/person-search', {
+            templateUrl: 'components/person-search/person-search.html'
+        });
+    }])
+    .run(['ngTableDefaults', function(ngTableDefaults) {
+        ngTableDefaults.params.count = 5;
+        ngTableDefaults.settings.counts = [];
+    }]);
